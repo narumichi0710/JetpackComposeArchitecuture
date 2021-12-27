@@ -8,3 +8,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ArchitecutureTemplate"
 include ':app'
+include ':domain:entity'
+include ':domain:repository'
+include ':domain:gateway'
+include ':presentation:view'
+include ':presentation:viewModel'
