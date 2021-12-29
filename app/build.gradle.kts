@@ -1,7 +1,7 @@
 import dependencies.baseExtension
 
 android {
-    baseExtension()
+    baseExtension(this, true, project)
 }
 
 
