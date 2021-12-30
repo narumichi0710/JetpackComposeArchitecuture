@@ -6,14 +6,11 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "ArchitecutureTemplate"
-include (":app")
-include (":presentation:view")
-include (":presentation:viewModel")
-include (":domain:repository")
-include (":domain:entity")
-include (":domain:gateway")
-include(":domain:repository:core")
-include(":domain:entity:core")
-include(":domain:useCase:core")
+
+include(":app")
 include(":presentation:view:core")
 include(":presentation:viewModel:core")
+include(":domain:entity:core")
+include(":domain:useCase:core")
+include(":data:repository:core")
+include(":data:gateway")
