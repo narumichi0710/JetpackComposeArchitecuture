@@ -1,10 +1,8 @@
-import dependencies.baseExtension
-import dependencies.basePlugin
-
 android {
-    baseExtension(this, true, project)
+    script.StaticScript.baseExtension(this, true, project)
 }
 
 plugins {
-    basePlugin(true)
+    id("com.android.application")
+    kotlin("android")
 }
