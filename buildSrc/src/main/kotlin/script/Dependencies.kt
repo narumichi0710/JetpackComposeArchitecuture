@@ -9,6 +9,7 @@ import org.gradle.kotlin.dsl.dependencies
  */
 
 object Dependencies {
+
     fun baseDependencies(
         project: Project
     ) {
@@ -17,16 +18,18 @@ object Dependencies {
                 takeIf { this.hasProperty("android") }
                     .let {
                         it?.dependencies {
-                            //TODO: AAC関連のライブラリは必要なければ削除する
-                            "implementation"("androidx.core:core-ktx:1.7.0")
-                            "implementation"("androidx.appcompat:appcompat:1.4.0")
-                            "implementation"("com.google.android.material:material:1.4.0")
-                            "implementation"("androidx.constraintlayout:constraintlayout:2.1.2")
+                            Libraries.let { it ->
+                                //TODO: AAC関連のライブラリ必要なければ削除する
+                                "implementation"("androidx.core:core-ktx:1.7.0")
+                                "implementation"("androidx.appcompat:appcompat:1.4.0")
+                                "implementation"("com.google.android.material:material:1.4.0")
+                                "implementation"("androidx.constraintlayout:constraintlayout:2.1.2")
 
-                            // Test
-                            "testImplementation"("junit:junit:4.13.2")
-                            "androidTestImplementation"("androidx.test.ext:junit:1.1.3")
-                            "androidTestImplementation"("androidx.test.espresso:espresso-core:3.4.0")
+                                // Test
+                                it.provideImpl(it.testImpl, it.junit)
+                                it.provideImpl(it.androidTestImpl,it.androidxJunit)
+                                it.provideImpl(it.androidTestImpl, it.espressoCore)
+                            }
                         }
                         when (this.path) {
                             ":app" -> dependencies {

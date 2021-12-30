@@ -1,4 +1,4 @@
-package dependencies
+package script
 
 object BuildConfig {
     const val applicationId = "com.narumichi.architecuturetemplate"

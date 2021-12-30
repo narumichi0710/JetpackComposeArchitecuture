@@ -1,7 +1,6 @@
 package script
 
 import com.android.build.gradle.BaseExtension
-import dependencies.BuildConfig
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 

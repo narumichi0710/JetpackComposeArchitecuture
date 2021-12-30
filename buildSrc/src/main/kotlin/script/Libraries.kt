@@ -5,6 +5,14 @@ package script
  */
 
 object Libraries {
-    const val hiltVersion = "2.40.5"
-    const val lifecycleHiltVersion = "1.3.2"
+
+    const val impl = "implementation"
+    const val testImpl = "testImplementation"
+    const val androidTestImpl = "androidTestImplementation"
+    const val junit = "junit:junit:4.13.2"
+    const val androidxJunit = "androidx.test.ext:junit:1.1.3"
+    const val espressoCore = "androidx.test.espresso:espresso-core:3.4.0"
+
+
+    fun provideImpl(library: String, impl: String) = impl.plus((library))
 }
