@@ -1,4 +1,4 @@
-package com.narumichi.gateway
+package com.narumichi.remote
 
 import org.junit.Test
 

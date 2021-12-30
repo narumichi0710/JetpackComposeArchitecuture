@@ -1,4 +1,4 @@
-package com.narumichi.gateway
+package com.narumichi.remote
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.narumichi.gateway.test", appContext.packageName)
+        assertEquals("com.narumichi.remote.test", appContext.packageName)
     }
 }
