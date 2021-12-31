@@ -6,13 +6,21 @@ package script
 
 object Libraries {
 
-    const val impl = "implementation"
-    const val testImpl = "testImplementation"
-    const val androidTestImpl = "androidTestImplementation"
-    const val junit = "junit:junit:4.13.2"
-    const val androidxJunit = "androidx.test.ext:junit:1.1.3"
-    const val espressoCore = "androidx.test.espresso:espresso-core:3.4.0"
+    enum class Libs(val lib: String, val optional: String = "") {
+        Junit("junit:junit:4.13.2"),
+        AndroidxJunit("androidx.test.ext:junit:1.1.3"),
+        EspressoCore("androidx.test.espresso:espresso-core:3.4.0")
+    }
 
+    enum class Props(val prop: String) {
+        Api("api"),
+        Impl("implementation"),
+        TestImpl("testImplementation"),
+        AndroidTestImpl("androidTestImplementation")
+    }
 
-    fun provideImpl(library: String, impl: String) = impl.plus((library))
+    fun provideLibs(props: Props, libs: Libs) {
+        if (libs.optional.isEmpty()) props.prop.plus((libs.lib))
+        else props.prop.plus(("kotlin".plus((listOf(libs.lib, libs.optional)))))
+    }
 }

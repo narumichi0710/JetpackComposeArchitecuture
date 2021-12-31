@@ -15,25 +15,22 @@ object Dependencies {
     ) {
         project.subprojects {
             afterEvaluate {
-                takeIf { this.hasProperty("android") }
-                    .let {
-                        it?.dependencies {
-                            Libraries.let { it ->
-                                //TODO: AAC関連のライブラリ必要なければ削除する
-                                "implementation"("androidx.core:core-ktx:1.7.0")
-                                "implementation"("androidx.appcompat:appcompat:1.4.0")
-                                "implementation"("com.google.android.material:material:1.4.0")
-                                "implementation"("androidx.constraintlayout:constraintlayout:2.1.2")
+                takeIf { this.hasProperty("android") }.let { project ->
+                    Libraries.let {
+                        project?.dependencies {
+                            //TODO: AAC関連のライブラリ必要なければ削除する
+                            "implementation"("androidx.core:core-ktx:1.7.0")
+                            "implementation"("androidx.appcompat:appcompat:1.4.0")
+                            "implementation"("com.google.android.material:material:1.4.0")
+                            "implementation"("androidx.constraintlayout:constraintlayout:2.1.2")
 
-                                // Test
-                                it.provideImpl(it.testImpl, it.junit)
-                                it.provideImpl(it.androidTestImpl,it.androidxJunit)
-                                it.provideImpl(it.androidTestImpl, it.espressoCore)
-                            }
+                            // Test
+                            it.provideLibs(Libraries.Props.TestImpl, Libraries.Libs.Junit)
+                            it.provideLibs(Libraries.Props.AndroidTestImpl, Libraries.Libs.AndroidxJunit)
+                            it.provideLibs(Libraries.Props.AndroidTestImpl, Libraries.Libs.EspressoCore)
                         }
                         when (this.path) {
                             ":app" -> dependencies {
-
                             }
                             ":presentation:view" -> dependencies {
                             }
@@ -49,6 +46,7 @@ object Dependencies {
                             }
                         }
                     }
+                }
             }
         }
     }
