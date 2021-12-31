@@ -10,6 +10,16 @@ import org.gradle.kotlin.dsl.dependencies
 
 object Dependencies {
 
+    enum class DepPath(val path: String) {
+        App(":app"),
+        View(":presentation:view"),
+        ViewModel(":presentation:viewModel"),
+        UseCase(":domain:useCase"),
+        Entity(":domain:entity"),
+        Repository(":data:repository"),
+        Gateway(":data:gateway")
+    }
+
     fun baseDependencies(
         project: Project
     ) {
@@ -30,19 +40,19 @@ object Dependencies {
                             it.provideLibs(Libraries.Props.AndroidTestImpl, Libraries.Libs.EspressoCore)
                         }
                         when (this.path) {
-                            ":app" -> dependencies {
+                            DepPath.App.path -> dependencies {
                             }
-                            ":presentation:view" -> dependencies {
+                            DepPath.View.path -> dependencies {
                             }
-                            ":presentation:viewModel" -> dependencies {
+                            DepPath.ViewModel.path -> dependencies {
                             }
-                            ":domain:useCase" -> dependencies {
+                            DepPath.UseCase.path -> dependencies {
                             }
-                            ":domain:entity" -> dependencies {
+                            DepPath.Entity.path -> dependencies {
                             }
-                            ":data:repository" -> dependencies {
+                            DepPath.Repository.path -> dependencies {
                             }
-                            ":data:gateway" -> dependencies {
+                            DepPath.Gateway.path -> dependencies {
                             }
                         }
                     }
