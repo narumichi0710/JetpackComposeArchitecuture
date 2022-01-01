@@ -6,3 +6,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
 }
+
+dependencies {
+    script.ModuleStructure.baseModuleStructure(project)
+}
