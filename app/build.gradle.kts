@@ -7,6 +7,4 @@ plugins {
     kotlin("android")
 }
 
-dependencies {
-    script.ModuleStructure.baseModuleStructure(project)
-}
+script.ModuleStructure.baseModuleStructure(project)
