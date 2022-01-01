@@ -10,16 +10,6 @@ import org.gradle.kotlin.dsl.dependencies
 
 object Dependencies {
 
-    enum class DepPath(val path: String) {
-        App(":app"),
-        View(":presentation:view"),
-        ViewModel(":presentation:viewModel"),
-        UseCase(":domain:useCase"),
-        Entity(":domain:entity"),
-        Repository(":data:repository"),
-        Gateway(":data:gateway")
-    }
-
     fun baseDependencies(
         project: Project
     ) {
@@ -40,19 +30,19 @@ object Dependencies {
                             it.provideLibs(Libraries.Props.AndroidTestImpl, Libraries.Libs.EspressoCore)
                         }
                         when (this.path) {
-                            DepPath.App.path -> dependencies {
+                            ModuleStructure.ModulePath.App.path -> dependencies {
                             }
-                            DepPath.View.path -> dependencies {
+                            ModuleStructure.ModulePath.View.path -> dependencies {
                             }
-                            DepPath.ViewModel.path -> dependencies {
+                            ModuleStructure.ModulePath.ViewModel.path -> dependencies {
                             }
-                            DepPath.UseCase.path -> dependencies {
+                            ModuleStructure.ModulePath.UseCase.path -> dependencies {
                             }
-                            DepPath.Entity.path -> dependencies {
+                            ModuleStructure.ModulePath.Entity.path -> dependencies {
                             }
-                            DepPath.Repository.path -> dependencies {
+                            ModuleStructure.ModulePath.Repository.path -> dependencies {
                             }
-                            DepPath.Gateway.path -> dependencies {
+                            ModuleStructure.ModulePath.Gateway.path -> dependencies {
                             }
                         }
                     }
@@ -61,23 +51,3 @@ object Dependencies {
         }
     }
 }
-
-/**
- * NOTE:
- * 全モジュールで利用するライブラリを定義する関数
- * 現状はプロジェクト直下のktsで定義しているが、今後使うかもしれないのでコメントアウトしておく
- */
-
-//fun Project.baseDependencies(additionalConfiguration: DependencyHandlerScope.() -> Unit) {
-//    dependencies {
-//        implementation(Libs.Kotlin.stdlib)
-//        implementation(Libs.AndroidX.appCompat)
-//        implementation(Libs.AndroidX.coreKtx)
-//        implementation(Libs.AndroidX.constraint)
-//    }
-//    dependencies(additionalConfiguration)
-//}
-//
-//private fun DependencyHandler.implementation(depName: Any) {
-//    add("implementation", depName)
-//}
