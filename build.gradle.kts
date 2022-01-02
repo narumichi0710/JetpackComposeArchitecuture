@@ -9,9 +9,7 @@ buildscript {
     }
 }
 
-allprojects {
-    script.Dependencies.baseDependencies(this.project)
-}
+baseDependencies()
 
 tasks.create("clean", type = Delete::class) {
     delete(rootProject.buildDir)

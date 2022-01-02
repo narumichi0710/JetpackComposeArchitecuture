@@ -1,18 +1,21 @@
-package script
-
+import Dependencies.provideDependencies
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
+import script.Libraries
+import script.ModuleStructure
 
 
 /**
  * ライブラリの依存関係を記述するオブジェクト
  */
 
-object Dependencies {
 
-    fun baseDependencies(
-        project: Project
-    ) {
+fun Project.baseDependencies() {
+    provideDependencies(this)
+}
+
+object Dependencies {
+    internal fun provideDependencies(project: Project) {
         project.subprojects {
             afterEvaluate {
                 takeIf { this.hasProperty("android") }.let { project ->
@@ -24,6 +27,8 @@ object Dependencies {
                             "implementation"("com.google.android.material:material:1.4.0")
                             "implementation"("androidx.constraintlayout:constraintlayout:2.1.2")
 
+                            // Log
+                            it.provideLibs(Libraries.Props.Impl, Libraries.Libs.Timber)
                             // Test
                             it.provideLibs(Libraries.Props.TestImpl, Libraries.Libs.Junit)
                             it.provideLibs(Libraries.Props.AndroidTestImpl, Libraries.Libs.AndroidxJunit)
