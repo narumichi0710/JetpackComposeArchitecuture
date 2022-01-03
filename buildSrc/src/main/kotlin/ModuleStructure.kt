@@ -42,44 +42,23 @@ object ModuleStructure {
                             impl(it)
                     }
                 }
-                ModulePath.View.path -> dependencies {
-                    impl(ModulePath.ViewModel)
-                    impl(ModulePath.App)
-                    impl(ModulePath.UseCase)
-                }
-                ModulePath.ViewModel.path -> dependencies {
-                    impl(ModulePath.UseCase)
-                    impl(ModulePath.Repository)
-                }
-                ModulePath.UseCase.path -> dependencies {
-                    impl(ModulePath.Entity)
-                }
-                ModulePath.Entity.path -> dependencies {
-                }
-                ModulePath.Repository.path -> dependencies {
-                    impl(ModulePath.UseCase)
-                    impl(ModulePath.Gateway)
-                }
-
-                //TODO: 現状の実装では子モジュールが増える度に下記に記述が増えていく様になってしまう
-                // やりたいこと
-                // ①子モジュールは同じファイル名の子モジュールに親モジュールと同じ様にapiで依存伝播させる
-                // ②各coreモジュールからその親モジュール内の子モジュールに依存伝播させる
-                //子モジュール
                 ModulePath.ViewCore.path -> dependencies {
-                    api(ModulePath.ViewModelCore)
-                    api(ModulePath.UseCaseCore)
+                    impl(ModulePath.ViewModelCore)
+                    impl(ModulePath.UseCaseCore)
                 }
                 ModulePath.ViewModelCore.path -> dependencies {
-                    api(ModulePath.UseCaseCore)
+                    impl(ModulePath.UseCaseCore)
+                    impl(ModulePath.RepositoryCore)
                 }
                 ModulePath.UseCaseCore.path -> dependencies {
-                    api(ModulePath.EntityCore)
+                    impl(ModulePath.EntityCore)
+                    impl(ModulePath.RepositoryCore)
                 }
                 ModulePath.EntityCore.path -> dependencies {
                 }
                 ModulePath.RepositoryCore.path -> dependencies {
-                    api(ModulePath.UseCaseCore)
+                    impl(ModulePath.GatewayRemote)
+                    impl(ModulePath.GatewayLocal)
                 }
             }
         }
@@ -88,7 +67,6 @@ object ModuleStructure {
     private fun DependencyHandler.impl(modulePath: ModulePath) {
         add(Libs.Props.Impl.prop, (project(mapOf("path" to modulePath.path))))
     }
-
 
     private fun DependencyHandler.api(modulePath: ModulePath) {
         add(Libs.Props.Api.prop, (project(mapOf("path" to modulePath.path))))
