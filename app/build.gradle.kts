@@ -1,5 +1,5 @@
 android {
-    script.StaticScript.baseExtension(this, true, project)
+    script.StaticScript.baseExtension(this, project)
 }
 
 plugins {
@@ -7,4 +7,4 @@ plugins {
     kotlin("android")
 }
 
-script.ModuleStructure.baseModuleStructure(project)
+baseModuleStructure()

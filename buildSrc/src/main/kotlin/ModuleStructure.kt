@@ -1,13 +1,17 @@
-package script
-
+import ModuleStructure.configureModuleStructure
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.project
+import script.Libraries
 
 /**
  * モジュール間の依存関係を定義するオブジェクト
  */
+
+fun Project.baseModuleStructure() {
+    configureModuleStructure(this)
+}
 
 object ModuleStructure {
 
@@ -28,29 +32,33 @@ object ModuleStructure {
         GatewayRemote(":data:gateway:remote")
     }
 
-    fun baseModuleStructure(project: Project) {
+    fun configureModuleStructure(project: Project) {
         project.run {
             when (this.path) {
                 //親モジュール
                 ModulePath.App.path -> dependencies {
+                    ModulePath.values().forEach {
+                        if (it.path != ModulePath.App.path && !it.isParent)
+                            impl(it)
+                    }
                 }
                 ModulePath.View.path -> dependencies {
-                    add(ModulePath.ViewModel)
-                    add(ModulePath.App)
-                    add(ModulePath.UseCase)
+                    impl(ModulePath.ViewModel)
+                    impl(ModulePath.App)
+                    impl(ModulePath.UseCase)
                 }
                 ModulePath.ViewModel.path -> dependencies {
-                    add(ModulePath.UseCase)
-                    add(ModulePath.Repository)
+                    impl(ModulePath.UseCase)
+                    impl(ModulePath.Repository)
                 }
                 ModulePath.UseCase.path -> dependencies {
-                    add(ModulePath.Entity)
+                    impl(ModulePath.Entity)
                 }
                 ModulePath.Entity.path -> dependencies {
                 }
                 ModulePath.Repository.path -> dependencies {
-                    add(ModulePath.UseCase)
-                    add(ModulePath.Gateway)
+                    impl(ModulePath.UseCase)
+                    impl(ModulePath.Gateway)
                 }
 
                 //TODO: 現状の実装では子モジュールが増える度に下記に記述が増えていく様になってしまう
@@ -59,31 +67,31 @@ object ModuleStructure {
                 // ②各coreモジュールからその親モジュール内の子モジュールに依存伝播させる
                 //子モジュール
                 ModulePath.ViewCore.path -> dependencies {
-                    add(ModulePath.ViewModelCore)
-                    add(ModulePath.UseCaseCore)
+                    api(ModulePath.ViewModelCore)
+                    api(ModulePath.UseCaseCore)
                 }
                 ModulePath.ViewModelCore.path -> dependencies {
-                    add(ModulePath.UseCaseCore)
-                    add(ModulePath.ViewModelCore)
+                    api(ModulePath.UseCaseCore)
                 }
                 ModulePath.UseCaseCore.path -> dependencies {
-                    add(ModulePath.EntityCore)
+                    api(ModulePath.EntityCore)
                 }
                 ModulePath.EntityCore.path -> dependencies {
                 }
                 ModulePath.RepositoryCore.path -> dependencies {
-                    add(ModulePath.UseCaseCore)
-                    add(ModulePath.Gateway)
+                    api(ModulePath.UseCaseCore)
                 }
             }
         }
     }
 
-    //NOTE: 親モジュールはImplementation, 子モジュールはApiで依存を伝播させる
-    private fun DependencyHandler.add(modulePath: ModulePath) {
-        if (modulePath.isParent)
-            add(Libraries.Props.Impl.prop, (project("path" to modulePath.path)))
-        else
-            add(Libraries.Props.Api.prop, (project("path" to modulePath.path)))
+    private fun DependencyHandler.impl(modulePath: ModulePath) {
+        add(Libraries.Props.Impl.prop, (project(mapOf("path" to modulePath.path))))
     }
+
+
+    private fun DependencyHandler.api(modulePath: ModulePath) {
+        add(Libraries.Props.Api.prop, (project("path" to modulePath.path)))
+    }
+
 }

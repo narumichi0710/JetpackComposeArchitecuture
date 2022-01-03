@@ -1,5 +1,3 @@
-package script
-
 object BuildConfig {
     const val applicationId = "com.narumichi.architecuturetemplate"
     const val versionCode = 1
