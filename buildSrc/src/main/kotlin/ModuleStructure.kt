@@ -91,7 +91,7 @@ object ModuleStructure {
 
 
     private fun DependencyHandler.api(modulePath: ModulePath) {
-        add(Libs.Props.Api.prop, (project("path" to modulePath.path)))
+        add(Libs.Props.Api.prop, (project(mapOf("path" to modulePath.path))))
     }
 
 }
