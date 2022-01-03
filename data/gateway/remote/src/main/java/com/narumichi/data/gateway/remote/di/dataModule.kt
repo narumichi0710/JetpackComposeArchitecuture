@@ -1,5 +1,8 @@
 package com.narumichi.data.gateway.remote.di
 
+import com.narumichi.data.gateway.remote.api.ApiHelper
+import com.narumichi.data.gateway.remote.api.ApiHelperImpl
+import com.narumichi.data.gateway.remote.api.ApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -45,4 +48,14 @@ object ApiModule {
         .client(okHttpClient)
         .build()
 
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper
+
 }
+
+
