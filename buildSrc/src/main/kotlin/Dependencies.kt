@@ -46,10 +46,16 @@ object Dependencies {
                                 ModuleStructure.ModulePath.UseCase.path -> {
                                 }
                                 ModuleStructure.ModulePath.Entity.path -> {
+                                    add(Libs.Props.Impl.prop, Libs.Square.Moshi.moshi)
+                                    add(Libs.Props.Impl.prop, Libs.Square.Moshi.moshiKotlin)
                                 }
                                 ModuleStructure.ModulePath.Repository.path -> {
                                 }
                                 ModuleStructure.ModulePath.Gateway.path -> {
+                                    add(Libs.Props.Impl.prop, Libs.Square.OkHttp.okHttp)
+                                    add(Libs.Props.Impl.prop, Libs.Square.OkHttp.loggingInterceptor)
+                                    add(Libs.Props.Impl.prop, Libs.Square.Retrofit.retrofit)
+                                    add(Libs.Props.Impl.prop, Libs.Square.Retrofit.converterMoshi)
                                 }
                             }
                         }
