@@ -1,4 +1,5 @@
-package com.narumichi.remote
+package com.narumichi.data.gateway.remote
+
 
 class Tmp {
 }

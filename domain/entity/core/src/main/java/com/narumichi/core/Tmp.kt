@@ -1,4 +1,4 @@
-package com.narumichi.core
+package com.narumichi.domain.entity.core
 
 class Tmp {
 }

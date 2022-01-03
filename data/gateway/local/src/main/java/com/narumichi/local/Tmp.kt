@@ -1,4 +1,4 @@
-package com.narumichi.local
+package com.narumichi.data.gateway.local
 
 class Tmp {
 }

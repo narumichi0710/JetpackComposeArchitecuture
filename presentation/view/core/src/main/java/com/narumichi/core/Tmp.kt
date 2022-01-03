@@ -1,4 +1,5 @@
-package com.narumichi.core
+package com.narumichi.presentation.view.core
+
 
 class Tmp {
 }

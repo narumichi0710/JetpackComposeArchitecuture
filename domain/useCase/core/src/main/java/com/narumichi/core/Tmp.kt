@@ -1,4 +1,4 @@
-package com.narumichi.core
+package com.narumichi.domain.useCase.core
 
 class Tmp {
 }
