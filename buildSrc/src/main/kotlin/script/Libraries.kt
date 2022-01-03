@@ -21,7 +21,7 @@ object Libraries {
     }
 
     fun provideLibs(props: Props, libs: Libs) {
-        if (libs.optional.isEmpty()) props.prop.plus((libs.lib))
-        else props.prop.plus(("kotlin".plus((listOf(libs.lib, libs.optional)))))
+        if (libs.optional.isEmpty()) props.prop to (libs.lib)
+        else props.prop to ("kotlin" to (listOf(libs.lib, libs.optional)))
     }
 }
