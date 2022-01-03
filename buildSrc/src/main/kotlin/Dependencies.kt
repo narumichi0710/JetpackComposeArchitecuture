@@ -2,8 +2,7 @@ import Dependencies.provideDependencies
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.repositories
-import script.Libraries
-
+import script.Libs
 
 /**
  * ライブラリの依存関係を記述するオブジェクト
@@ -24,41 +23,33 @@ object Dependencies {
             subprojects {
                 afterEvaluate {
                     takeIf { this.hasProperty("android") }.let { project ->
-                        Libraries.let {
-                            project?.dependencies {
-                                //TODO: AAC関連のライブラリ必要なければ削除する
-                                "implementation"("androidx.core:core-ktx:1.7.0")
-                                "implementation"("androidx.appcompat:appcompat:1.4.0")
-                                "implementation"("com.google.android.material:material:1.4.0")
-                                "implementation"("androidx.constraintlayout:constraintlayout:2.1.2")
+                        project?.dependencies {
+                            add(Libs.Props.Impl.prop, Libs.AndroidX.coreKtx)
+                            add(Libs.Props.Impl.prop, Libs.AndroidX.appCompat)
+                            add(Libs.Props.Impl.prop, Libs.Google.material)
+                            add(Libs.Props.Impl.prop, Libs.Other.timber)
+                            add(Libs.Props.TestImpl.prop, Libs.Test.junit)
+                            add(Libs.Props.AndroidTestImpl.prop, Libs.Test.espresso)
 
-                                // Log
-                                it.provideLibs(Libraries.Props.Impl, Libraries.Libs.Timber)
-                                // Test
-                                it.provideLibs(Libraries.Props.TestImpl, Libraries.Libs.Junit)
-                                it.provideLibs(
-                                    Libraries.Props.AndroidTestImpl,
-                                    Libraries.Libs.AndroidxJunit
-                                )
-                                it.provideLibs(
-                                    Libraries.Props.AndroidTestImpl,
-                                    Libraries.Libs.EspressoCore
-                                )
-                            }
-                            when (this.path) {
-                                ModuleStructure.ModulePath.App.path -> dependencies {
+                            add(Libs.Props.Impl.prop, Libs.Google.Hilt.hilt)
+                            add(Libs.Props.Kapt.prop, Libs.Google.Hilt.compiler)
+                            add(Libs.Props.Impl.prop, Libs.AndroidX.Hilt.lifecycleViewModel)
+
+                            when (project.path) {
+                                ModuleStructure.ModulePath.App.path -> {
                                 }
-                                ModuleStructure.ModulePath.View.path -> dependencies {
+                                ModuleStructure.ModulePath.View.path -> {
+                                    add(Libs.Props.Impl.prop, Libs.AndroidX.Hilt.navigationCompose)
                                 }
-                                ModuleStructure.ModulePath.ViewModel.path -> dependencies {
+                                ModuleStructure.ModulePath.ViewModel.path -> {
                                 }
-                                ModuleStructure.ModulePath.UseCase.path -> dependencies {
+                                ModuleStructure.ModulePath.UseCase.path -> {
                                 }
-                                ModuleStructure.ModulePath.Entity.path -> dependencies {
+                                ModuleStructure.ModulePath.Entity.path -> {
                                 }
-                                ModuleStructure.ModulePath.Repository.path -> dependencies {
+                                ModuleStructure.ModulePath.Repository.path -> {
                                 }
-                                ModuleStructure.ModulePath.Gateway.path -> dependencies {
+                                ModuleStructure.ModulePath.Gateway.path -> {
                                 }
                             }
                         }

@@ -3,7 +3,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.project
-import script.Libraries
+import script.Libs
 
 /**
  * モジュール間の依存関係を定義するオブジェクト
@@ -86,12 +86,12 @@ object ModuleStructure {
     }
 
     private fun DependencyHandler.impl(modulePath: ModulePath) {
-        add(Libraries.Props.Impl.prop, (project(mapOf("path" to modulePath.path))))
+        add(Libs.Props.Impl.prop, (project(mapOf("path" to modulePath.path))))
     }
 
 
     private fun DependencyHandler.api(modulePath: ModulePath) {
-        add(Libraries.Props.Api.prop, (project("path" to modulePath.path)))
+        add(Libs.Props.Api.prop, (project("path" to modulePath.path)))
     }
 
 }
