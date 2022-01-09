@@ -8,7 +8,6 @@ import script.Libs
  * ライブラリの依存関係を記述するオブジェクト
  */
 
-
 fun Project.baseDependencies() {
     provideDependencies(this)
 }
@@ -22,7 +21,7 @@ object Dependencies {
             }
             subprojects {
                 afterEvaluate {
-                    takeIf { this.hasProperty("android") }.let { project ->
+                    takeIf { this.hasProperty(BuildConfig.android) }.let { project ->
                         project?.dependencies {
                             add(Libs.Props.Impl.prop, Libs.AndroidX.coreKtx)
                             add(Libs.Props.Impl.prop, Libs.AndroidX.appCompat)
@@ -36,20 +35,20 @@ object Dependencies {
                             add(Libs.Props.Impl.prop, Libs.AndroidX.Hilt.lifecycleViewModel)
 
                             when (project.path) {
-                                ModuleStructure.ModulePath.App.path -> {
+                                ProjectModule.formatPath(ProjectModule.ModuleType._app) -> {
                                 }
-                                ModuleStructure.ModulePath.View.path -> {
+                                ProjectModule.formatPath(ProjectModule.ModuleType._view) -> {
                                     add(Libs.Props.Impl.prop, Libs.AndroidX.Hilt.navigationCompose)
                                 }
-                                ModuleStructure.ModulePath.ViewModel.path -> {
+                                ProjectModule.formatPath(ProjectModule.ModuleType._viewModel) -> {
                                 }
-                                ModuleStructure.ModulePath.UseCase.path -> {
+                                ProjectModule.formatPath(ProjectModule.ModuleType._useCase) -> {
                                 }
-                                ModuleStructure.ModulePath.Entity.path -> {
+                                ProjectModule.formatPath(ProjectModule.ModuleType._entity) -> {
                                 }
-                                ModuleStructure.ModulePath.Repository.path -> {
+                                ProjectModule.formatPath(ProjectModule.ModuleType._repository) -> {
                                 }
-                                ModuleStructure.ModulePath.GatewayRemote.path -> {
+                                ProjectModule.formatPath(ProjectModule.ModuleType._gatewayRemote) -> {
                                     add(Libs.Props.Impl.prop, Libs.Square.OkHttp.okHttp)
                                     add(Libs.Props.Impl.prop, Libs.Square.OkHttp.loggingInterceptor)
                                     add(Libs.Props.Impl.prop, Libs.Square.Retrofit.retrofit)
@@ -57,6 +56,7 @@ object Dependencies {
                                     add(Libs.Props.Impl.prop, Libs.Square.Moshi.moshi)
                                     add(Libs.Props.Impl.prop, Libs.Square.Moshi.moshiKotlin)
                                 }
+
                             }
                         }
                     }

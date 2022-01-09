@@ -7,4 +7,5 @@ object BuildConfig {
     const val minSdkVersion = 26
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val consumerProguardFiles = "consumer-rules.pro"
+    const val android = "android"
 }

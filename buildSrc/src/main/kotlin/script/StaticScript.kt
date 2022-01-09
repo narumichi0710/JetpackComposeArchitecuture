@@ -11,8 +11,9 @@ object StaticScript {
     fun baseExtension(
         baseExtension: BaseExtension,
         project: Project? = null,
+        isRoot: Boolean? = false
     ) {
-        provideDefaultConfig(baseExtension, project)
+        provideDefaultConfig(baseExtension, project, isRoot)
         provideBaseExtension(baseExtension)
         provideBuildSetting(baseExtension)
     }
@@ -20,15 +21,14 @@ object StaticScript {
     private fun provideDefaultConfig(
         baseExtension: BaseExtension,
         project: Project?,
+        isRoot: Boolean?,
     ) {
         baseExtension.apply {
             compileSdkVersion(BuildConfig.compileSdkVersion)
             defaultConfig {
-                when (project?.path) {
-                    ModuleStructure.ModulePath.App.path -> {
-                        applicationId = BuildConfig.applicationId
-                    }
-                }
+                if (isRoot == true)
+                    applicationId = BuildConfig.applicationId
+
                 minSdk = BuildConfig.minSdkVersion
                 targetSdk = BuildConfig.targetSdkVersion
                 versionCode = BuildConfig.versionCode
