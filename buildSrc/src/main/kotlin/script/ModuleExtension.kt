@@ -1,0 +1,4 @@
+package script
+
+class ModuleExtension {
+}
