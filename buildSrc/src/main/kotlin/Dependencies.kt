@@ -3,6 +3,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.repositories
 import script.Libs
+import script.ModuleExtension
 
 /**
  * ライブラリの依存関係を記述するオブジェクト
@@ -35,20 +36,20 @@ object Dependencies {
                             add(Libs.Props.Impl.prop, Libs.AndroidX.Hilt.lifecycleViewModel)
 
                             when (project.path) {
-                                ProjectModule.formatPath(ProjectModule.ModuleType._app) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.ModuleType._app.name) -> {
                                 }
-                                ProjectModule.formatPath(ProjectModule.ModuleType._view) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.LayerType._presentation_view.name) -> {
                                     add(Libs.Props.Impl.prop, Libs.AndroidX.Hilt.navigationCompose)
                                 }
-                                ProjectModule.formatPath(ProjectModule.ModuleType._viewModel) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.LayerType._presentation_viewModel.name) -> {
                                 }
-                                ProjectModule.formatPath(ProjectModule.ModuleType._useCase) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.LayerType._domain_useCase.name) -> {
                                 }
-                                ProjectModule.formatPath(ProjectModule.ModuleType._entity) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.LayerType._domain_entity.name) -> {
                                 }
-                                ProjectModule.formatPath(ProjectModule.ModuleType._repository) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.LayerType._data_repository.name) -> {
                                 }
-                                ProjectModule.formatPath(ProjectModule.ModuleType._gatewayRemote) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.ModuleType._data_gateway_remote.name) -> {
                                     add(Libs.Props.Impl.prop, Libs.Square.OkHttp.okHttp)
                                     add(Libs.Props.Impl.prop, Libs.Square.OkHttp.loggingInterceptor)
                                     add(Libs.Props.Impl.prop, Libs.Square.Retrofit.retrofit)
@@ -56,7 +57,6 @@ object Dependencies {
                                     add(Libs.Props.Impl.prop, Libs.Square.Moshi.moshi)
                                     add(Libs.Props.Impl.prop, Libs.Square.Moshi.moshiKotlin)
                                 }
-
                             }
                         }
                     }

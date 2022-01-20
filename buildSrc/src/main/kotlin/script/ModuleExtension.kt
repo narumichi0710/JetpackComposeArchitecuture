@@ -45,8 +45,7 @@ object ModuleExtension {
     fun convertEnumName(project: Project): String = project.path
         .replace(":", "_")
 
-    fun convertModulePath(moduleType: ProjectModule.ModuleType): String = moduleType.name
-        .replace("_", ":")
+    fun convertModulePath(moduleType: String): String = moduleType.replace("_", ":")
 
     internal fun implAllModule(
         dependencyHandler: DependencyHandler,
@@ -57,14 +56,14 @@ object ModuleExtension {
         }
 
     internal fun DependencyHandler.impl(moduleType: ProjectModule.ModuleType) {
-        convertModulePath(moduleType).let { modulePath ->
+        convertModulePath(moduleType.name).let { modulePath ->
             println("structure:impl => $modulePath")
             add(Libs.Props.Impl.prop, project(mapOf("path" to modulePath)))
         }
     }
 
     internal fun DependencyHandler.api(moduleType: ProjectModule.ModuleType) {
-        convertModulePath(moduleType).let { modulePath ->
+        convertModulePath(moduleType.name).let { modulePath ->
             println("structure:api => $modulePath")
             add(Libs.Props.Api.prop, project(mapOf("path" to modulePath)))
         }
