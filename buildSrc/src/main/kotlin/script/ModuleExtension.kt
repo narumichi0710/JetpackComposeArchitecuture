@@ -13,13 +13,20 @@ object ModuleExtension {
 
     internal fun implDomainModule(
         dependencyHandler: DependencyHandler,
-        moduleType: ProjectModule.ModuleType?
+        moduleType: ProjectModule.ModuleType
     ) {
-        moduleType?.let {
-            sameLayerCoreModule(it).forEach {
-                dependencyHandler.api(it)
-            }
-            sameLayerChildModule(it).forEach {
+        if (isUnnecessaryImplModule(moduleType)) return
+        val needLayerModuleList = filteringNeedLayer(moduleType)
+        ProjectModule.ModuleType.values().filter {
+            it.domainType == moduleType.domainType && it.layerType in needLayerModuleList
+        }.forEach {
+            dependencyHandler.impl(it)
+        }
+        listOf(
+            sameLayerCoreModule(moduleType),
+            sameLayerChildModule(moduleType)
+        ).map {
+            it.forEach {
                 dependencyHandler.api(it)
             }
         }
@@ -42,7 +49,37 @@ object ModuleExtension {
             moduleType != it && it.name?.startsWith(moduleType.name)
         }
 
-    fun convertEnumName(project: Project): String = project.path
+    private fun filteringNeedLayer(
+        moduleType: ProjectModule.ModuleType
+    ): List<ProjectModule.Layer> = when (moduleType.layerType) {
+        ProjectModule.Layer.view ->
+            listOf(
+                ProjectModule.Layer.view,
+                ProjectModule.Layer.viewModel,
+                ProjectModule.Layer.useCase,
+                ProjectModule.Layer.entity
+            )
+        ProjectModule.Layer.viewModel ->
+            listOf(
+                ProjectModule.Layer.repository,
+                ProjectModule.Layer.useCase,
+                ProjectModule.Layer.entity
+            )
+        ProjectModule.Layer.repository ->
+            listOf(
+                ProjectModule.Layer.useCase,
+                ProjectModule.Layer.entity
+            )
+        ProjectModule.Layer.useCase ->
+            listOf(ProjectModule.Layer.entity)
+        else -> listOf()
+    }
+
+    private fun isUnnecessaryImplModule(
+        moduleType: ProjectModule.ModuleType
+    ): Boolean = moduleType.domainType in listOf(null)
+
+    private fun convertEnumName(project: Project): String = project.path
         .replace(":", "_")
 
     fun convertModulePath(moduleType: String): String = moduleType.replace("_", ":")

@@ -18,7 +18,7 @@ object ModuleStructure {
 
     internal fun configureModuleStructure(
         project: Project,
-        moduleType: ProjectModule.ModuleType?
+        moduleType: ProjectModule.ModuleType
     ) = project.dependencies.apply {
         when (moduleType) {
             ProjectModule.ModuleType._app -> {
