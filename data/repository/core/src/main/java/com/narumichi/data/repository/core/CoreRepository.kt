@@ -1,11 +1,11 @@
 package com.narumichi.data.repository.core
 
-import com.narumichi.data.gateway.remote.api.ApiService
+import com.narumichi.data.gateway.remote.api.ApiClient
 
 interface CoreRepository {
 }
 
 internal class CoreRepositoryImpl(
-    private val apiService: ApiService
+    private val apiHelper: ApiClient
 ): ApiRepository(), CoreRepository {
 }

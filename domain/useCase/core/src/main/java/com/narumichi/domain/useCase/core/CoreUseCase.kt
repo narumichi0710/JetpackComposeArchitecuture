@@ -3,10 +3,10 @@ package com.narumichi.domain.useCase.core
 import com.narumichi.data.repository.core.CoreRepository
 import javax.inject.Inject
 
-interface GetCoreUseCase {
+interface CoreUseCase {
 }
 
-class GetUseCaseImpl @Inject constructor(
+class CoreUseCaseImpl @Inject constructor(
     private val coreRepository: CoreRepository
-): GetCoreUseCase {
+): CoreUseCase {
 }

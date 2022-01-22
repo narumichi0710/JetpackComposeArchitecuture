@@ -1,6 +1,6 @@
 package com.narumichi.data.repository.core.di
 
-import com.narumichi.data.gateway.remote.api.ApiService
+import com.narumichi.data.gateway.remote.api.ApiClient
 import com.narumichi.data.repository.core.CoreRepository
 import com.narumichi.data.repository.core.CoreRepositoryImpl
 import dagger.Module
@@ -15,10 +15,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun providePokemonListViewRepository(
-        apiService: ApiService
-    ): CoreRepository {
-        return CoreRepositoryImpl(apiService)
-    }
+    fun provideCoreRepository(
+        apiHelper: ApiClient
+    ): CoreRepository = CoreRepositoryImpl(apiHelper)
 
 }

@@ -1,7 +1,7 @@
 package com.narumichi.data.gateway.remote.di
 
-import com.narumichi.data.gateway.remote.api.ApiHelper
-import com.narumichi.data.gateway.remote.api.ApiHelperImpl
+import com.narumichi.data.gateway.remote.api.ApiClient
+import com.narumichi.data.gateway.remote.api.ApiClientImpl
 import com.narumichi.data.gateway.remote.api.ApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -21,7 +21,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object ApiModule {
 
     @Provides
-    fun provideBaseUrl() = ""
+    fun provideBaseUrl(): String = ""
 
     @Singleton
     @Provides
@@ -42,20 +42,19 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, BASE_URL: String): Retrofit = Retrofit.Builder()
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create(provideMoshi()))
-        .baseUrl(BASE_URL)
+        .baseUrl(provideBaseUrl())
         .client(okHttpClient)
         .build()
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
     @Provides
     @Singleton
-    fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper
-
+    fun provideApiHelper(apiService: ApiService): ApiClient = ApiClientImpl(apiService)
 }
 
 
