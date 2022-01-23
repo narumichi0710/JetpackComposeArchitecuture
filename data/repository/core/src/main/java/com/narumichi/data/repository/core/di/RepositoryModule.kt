@@ -16,7 +16,7 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideCoreRepository(
-        apiHelper: ApiClient
-    ): CoreRepository = CoreRepositoryImpl(apiHelper)
+        apiClient: ApiClient
+    ): CoreRepository = CoreRepositoryImpl(apiClient)
 
 }

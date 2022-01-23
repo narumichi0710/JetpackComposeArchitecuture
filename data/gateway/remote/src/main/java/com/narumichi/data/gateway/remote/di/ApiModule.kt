@@ -54,7 +54,7 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun provideApiHelper(apiService: ApiService): ApiClient = ApiClientImpl(apiService)
+    fun provideApiClient(apiService: ApiService): ApiClient = ApiClientImpl(apiService)
 }
 
 
