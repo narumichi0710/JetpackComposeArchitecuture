@@ -28,6 +28,8 @@ object Dependencies {
                             add(Libs.Props.Impl.prop, Libs.AndroidX.appCompat)
                             add(Libs.Props.Impl.prop, Libs.Google.material)
                             add(Libs.Props.Impl.prop, Libs.Other.timber)
+                            add(Libs.Props.Impl.prop, Libs.Coroutine.core)
+                            add(Libs.Props.Impl.prop, Libs.Coroutine.android)
                             add(Libs.Props.TestImpl.prop, Libs.Test.junit)
                             add(Libs.Props.AndroidTestImpl.prop, Libs.Test.espresso)
 
