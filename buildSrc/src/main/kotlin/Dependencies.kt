@@ -28,13 +28,13 @@ object Dependencies {
                             add(Libs.Props.Impl.prop, Libs.AndroidX.appCompat)
                             add(Libs.Props.Impl.prop, Libs.Google.material)
                             add(Libs.Props.Impl.prop, Libs.Other.timber)
-                            add(Libs.Props.Impl.prop, Libs.Coroutine.core)
                             add(Libs.Props.Impl.prop, Libs.Coroutine.android)
                             add(Libs.Props.TestImpl.prop, Libs.Test.junit)
                             add(Libs.Props.AndroidTestImpl.prop, Libs.Test.espresso)
 
                             add(Libs.Props.Impl.prop, Libs.Google.Hilt.hilt)
                             add(Libs.Props.Kapt.prop, Libs.Google.Hilt.compiler)
+                            add(Libs.Props.Impl.prop, Libs.AndroidX.Compose.runtime)
                             add(Libs.Props.Impl.prop, Libs.AndroidX.Hilt.lifecycleViewModel)
 
                             when (project.path) {
@@ -44,12 +44,14 @@ object Dependencies {
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Hilt.navigationCompose)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.material)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.ui)
-                                    add(Libs.Props.Api.prop, Libs.AndroidX.Compose.runtime)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.preview)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.tooling)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.LifeCycle.runtime)
                                     add(Libs.Props.AndroidTestApi.prop, Libs.AndroidX.Compose.test)
                                 }
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._presentation_viewModel_core.name) -> {
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.LifeCycle.composeViewModel)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.LifeCycle.viewModel)
                                 }
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._domain_useCase_core.name) -> {
                                 }

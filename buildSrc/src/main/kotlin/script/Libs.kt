@@ -10,6 +10,7 @@ object Libs {
         const val kotlin = "1.6.0"
         const val junit = "4.13.2"
         const val espresso = "3.4.0"
+        const val lifeCycle = "2.4.0"
         const val compose = "1.1.0-rc01"
         const val hilt = "2.40.5"
         const val hiltLifecycle = "1.0.0-alpha03"
@@ -51,10 +52,16 @@ object Libs {
                 "androidx.hilt:hilt-navigation-compose:${Versions.hiltCompose}"
         }
 
+        object LifeCycle {
+            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifeCycle}"
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifeCycle}"
+            const val composeViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifeCycle}"
+        }
+
         object Compose {
             const val material = "androidx.compose.material:material:${Versions.compose}"
-            const val runtime = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
             const val ui = "androidx.compose.ui:ui:${Versions.compose}"
+            const val runtime = "androidx.compose.runtime:runtime:${Versions.compose}"
             const val preview = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
             const val tooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
             const val test = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
@@ -62,7 +69,6 @@ object Libs {
     }
 
     object Coroutine {
-        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutine}"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutine}"
     }
 
