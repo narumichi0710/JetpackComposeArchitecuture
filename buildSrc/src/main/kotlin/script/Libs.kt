@@ -24,6 +24,8 @@ object Libs {
         const val okhttp = "4.9.2"
         const val retrofit = "2.9.0"
         const val moshi = "1.13.0"
+        const val robolectric = "1.0.0"
+        const val mockito = "1.10.19"
     }
 
     object Plugin {
@@ -74,6 +76,8 @@ object Libs {
 
     object Test {
         const val junit = "junit:junit:${Versions.junit}"
+        const val robolectric = "androidx.test:core:${Versions.robolectric}"
+        const val mockito = "org.mockito:mockito-core:${Versions.mockito}"
         const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     }
 

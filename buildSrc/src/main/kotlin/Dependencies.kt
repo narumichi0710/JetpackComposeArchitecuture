@@ -30,8 +30,9 @@ object Dependencies {
                             add(Libs.Props.Impl.prop, Libs.Other.timber)
                             add(Libs.Props.Impl.prop, Libs.Coroutine.android)
                             add(Libs.Props.TestImpl.prop, Libs.Test.junit)
+                            add(Libs.Props.TestImpl.prop, Libs.Test.robolectric)
+                            add(Libs.Props.TestImpl.prop, Libs.Test.mockito)
                             add(Libs.Props.AndroidTestImpl.prop, Libs.Test.espresso)
-
                             add(Libs.Props.Impl.prop, Libs.Google.Hilt.hilt)
                             add(Libs.Props.Kapt.prop, Libs.Google.Hilt.compiler)
                             add(Libs.Props.Impl.prop, Libs.AndroidX.Compose.runtime)

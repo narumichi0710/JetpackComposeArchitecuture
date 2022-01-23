@@ -47,6 +47,7 @@ object StaticScript {
             compileOptions.sourceCompatibility = JavaVersion.VERSION_1_8
             compileOptions.targetCompatibility = JavaVersion.VERSION_1_8
             lintOptions.isAbortOnError = true
+            testOptions.unitTests.isIncludeAndroidResources = true
         }
     }
 
