@@ -7,9 +7,10 @@ package script
 object Libs {
 
     object Versions {
-        const val kapt = "1.6.10"
+        const val kotlin = "1.6.0"
         const val junit = "4.13.2"
         const val espresso = "3.4.0"
+        const val compose = "1.1.0-rc01"
         const val hilt = "2.40.5"
         const val hiltLifecycle = "1.0.0-alpha03"
         const val hiltCompose = "1.0.0-rc01"
@@ -18,17 +19,14 @@ object Libs {
         const val androidXCore = "1.7.0"
         const val androidXAppCompat = "1.4.0"
         const val gradle = "7.0.4"
-        const val gradlePlugin = "1.6.0"
         const val okhttp = "4.9.2"
         const val retrofit = "2.9.0"
         const val moshi = "1.13.0"
-
     }
 
     object Plugin {
         const val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
-        const val gradlePlugin =
-            "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.gradlePlugin}"
+        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     }
 
@@ -50,6 +48,15 @@ object Libs {
                 "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltLifecycle}"
             const val navigationCompose =
                 "androidx.hilt:hilt-navigation-compose:${Versions.hiltCompose}"
+        }
+
+        object Compose {
+            const val material = "androidx.compose.material:material:${Versions.compose}"
+            const val runtime = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+            const val ui = "androidx.compose.ui:ui:${Versions.compose}"
+            const val preview = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
+            const val tooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
+            const val test = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
         }
     }
 
@@ -86,7 +93,8 @@ object Libs {
         Impl("implementation"),
         Kapt("kapt"),
         TestImpl("testImplementation"),
-        AndroidTestImpl("androidTestImplementation")
+        AndroidTestImpl("androidTestImplementation"),
+        AndroidTestApi("androidTestApi")
     }
 
 }

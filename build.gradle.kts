@@ -11,6 +11,11 @@ buildscript {
 }
 baseDependencies()
 
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
 tasks.create("clean", type = Delete::class) {
     delete(rootProject.buildDir)
 }

@@ -22,8 +22,8 @@ object Dependencies {
             }
             subprojects {
                 afterEvaluate {
-                    takeIf { this.hasProperty(BuildConfig.android) }.let { project ->
-                        project?.dependencies {
+                    takeIf { this.hasProperty(BuildConfig.android) }?.let { project ->
+                        project.dependencies {
                             add(Libs.Props.Impl.prop, Libs.AndroidX.coreKtx)
                             add(Libs.Props.Impl.prop, Libs.AndroidX.appCompat)
                             add(Libs.Props.Impl.prop, Libs.Google.material)
@@ -38,24 +38,30 @@ object Dependencies {
                             when (project.path) {
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._app.name) -> {
                                 }
-                                ModuleExtension.convertModulePath(ProjectModule.LayerType._presentation_view.name) -> {
-                                    add(Libs.Props.Impl.prop, Libs.AndroidX.Hilt.navigationCompose)
+                                ModuleExtension.convertModulePath(ProjectModule.ModuleType._presentation_view_core.name) -> {
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Hilt.navigationCompose)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Compose.material)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Compose.ui)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Compose.runtime)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Compose.preview)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Compose.tooling)
+                                    add(Libs.Props.AndroidTestApi.prop, Libs.AndroidX.Compose.test)
                                 }
-                                ModuleExtension.convertModulePath(ProjectModule.LayerType._presentation_viewModel.name) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.ModuleType._presentation_viewModel_core.name) -> {
                                 }
-                                ModuleExtension.convertModulePath(ProjectModule.LayerType._domain_useCase.name) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.ModuleType._domain_useCase_core.name) -> {
                                 }
-                                ModuleExtension.convertModulePath(ProjectModule.LayerType._domain_entity.name) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.ModuleType._domain_entity_core.name) -> {
                                 }
-                                ModuleExtension.convertModulePath(ProjectModule.LayerType._data_repository.name) -> {
+                                ModuleExtension.convertModulePath(ProjectModule.ModuleType._data_repository_core.name) -> {
                                 }
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._data_gateway_remote.name) -> {
-                                    add(Libs.Props.Impl.prop, Libs.Square.OkHttp.okHttp)
-                                    add(Libs.Props.Impl.prop, Libs.Square.OkHttp.loggingInterceptor)
-                                    add(Libs.Props.Impl.prop, Libs.Square.Retrofit.retrofit)
-                                    add(Libs.Props.Impl.prop, Libs.Square.Retrofit.converterMoshi)
-                                    add(Libs.Props.Impl.prop, Libs.Square.Moshi.moshi)
-                                    add(Libs.Props.Impl.prop, Libs.Square.Moshi.moshiKotlin)
+                                    add(Libs.Props.Api.prop, Libs.Square.OkHttp.okHttp)
+                                    add(Libs.Props.Api.prop, Libs.Square.OkHttp.loggingInterceptor)
+                                    add(Libs.Props.Api.prop, Libs.Square.Retrofit.retrofit)
+                                    add(Libs.Props.Api.prop, Libs.Square.Retrofit.converterMoshi)
+                                    add(Libs.Props.Api.prop, Libs.Square.Moshi.moshi)
+                                    add(Libs.Props.Api.prop, Libs.Square.Moshi.moshiKotlin)
                                 }
                             }
                         }

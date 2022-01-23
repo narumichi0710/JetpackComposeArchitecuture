@@ -23,6 +23,7 @@ object StaticScript {
         project: Project?,
         isRoot: Boolean?,
     ) {
+        //TODO: AddFlavorSetting
         baseExtension.apply {
             compileSdkVersion(BuildConfig.compileSdkVersion)
             defaultConfig {
@@ -43,13 +44,9 @@ object StaticScript {
 
     private fun provideBaseExtension(baseExtension: BaseExtension) {
         baseExtension.apply {
-            compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_1_8
-                targetCompatibility = JavaVersion.VERSION_1_8
-            }
-            lintOptions {
-                isAbortOnError = true
-            }
+            compileOptions.sourceCompatibility = JavaVersion.VERSION_1_8
+            compileOptions.targetCompatibility = JavaVersion.VERSION_1_8
+            lintOptions.isAbortOnError = true
         }
     }
 

@@ -1,5 +1,7 @@
 android {
     script.StaticScript.baseExtension(this, project, true)
+    buildFeatures.compose = true
+    composeOptions.kotlinCompilerExtensionVersion = script.Libs.Versions.compose
 }
 
 plugins {

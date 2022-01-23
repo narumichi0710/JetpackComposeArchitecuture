@@ -1,4 +1,8 @@
 package com.narumichi.presentation.view.core
 
-class Tmp {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun CoreScreen(){
+
 }
