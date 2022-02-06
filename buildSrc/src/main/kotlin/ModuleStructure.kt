@@ -40,6 +40,16 @@ object ModuleStructure {
                 api(ProjectModule.ModuleType._data_gateway_remote)
                 api(ProjectModule.ModuleType._data_gateway_local)
             }
+            // gatewayモジュール
+            ProjectModule.ModuleType._data_gateway_local -> {
+                impl(ProjectModule.ModuleType._domain_entity_core)
+            }
+            ProjectModule.ModuleType._data_gateway_remote -> {
+                ModuleExtension.filterLingLayerList(ProjectModule.Layer.entity).forEach {
+                    api(it)
+                }
+            }
+
             else -> ModuleExtension.implDomainModule(this, moduleType)
         }
     }

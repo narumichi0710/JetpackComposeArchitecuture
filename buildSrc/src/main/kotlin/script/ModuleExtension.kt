@@ -49,6 +49,11 @@ object ModuleExtension {
             moduleType != it && it.name?.startsWith(moduleType.name)
         }
 
+    internal fun filterLingLayerList(layerType: ProjectModule.Layer): List<ProjectModule.ModuleType> =
+        ProjectModule.ModuleType.values().toList().filter {
+            it.name.contains(layerType.name)
+        }
+
     private fun filteringNeedLayer(
         moduleType: ProjectModule.ModuleType
     ): List<ProjectModule.Layer> = when (moduleType.layerType) {

@@ -57,6 +57,7 @@ object Dependencies {
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._domain_useCase_core.name) -> {
                                 }
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._domain_entity_core.name) -> {
+                                    add(Libs.Props.Api.prop, Libs.Square.Moshi.moshiKotlin)
                                 }
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._data_repository_core.name) -> {
                                 }
@@ -65,7 +66,6 @@ object Dependencies {
                                     add(Libs.Props.Api.prop, Libs.Square.OkHttp.loggingInterceptor)
                                     add(Libs.Props.Api.prop, Libs.Square.Retrofit.retrofit)
                                     add(Libs.Props.Api.prop, Libs.Square.Retrofit.converterMoshi)
-                                    add(Libs.Props.Api.prop, Libs.Square.Moshi.moshi)
                                     add(Libs.Props.Api.prop, Libs.Square.Moshi.moshiKotlin)
                                 }
                             }
