@@ -1,6 +1,8 @@
 android {
     script.StaticScript.baseExtension(this, project, true)
     buildFeatures.compose = true
+    buildFeatures.dataBinding = true
+    buildFeatures.viewBinding = true
     composeOptions.kotlinCompilerExtensionVersion = script.Libs.Versions.compose
 }
 

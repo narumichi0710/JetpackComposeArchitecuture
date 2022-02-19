@@ -42,7 +42,6 @@ object Dependencies {
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._app.name) -> {
                                 }
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._presentation_layout_core.name) -> {
-                                    add(Libs.Props.Api.prop, Libs.AndroidX.Hilt.navigationCompose)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.material)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.ui)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.preview)
@@ -51,7 +50,6 @@ object Dependencies {
                                     add(Libs.Props.AndroidTestApi.prop, Libs.AndroidX.Compose.test)
                                 }
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._presentation_view_core.name) -> {
-                                    add(Libs.Props.Api.prop, Libs.AndroidX.Hilt.navigationCompose)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.material)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.ui)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.preview)
@@ -62,6 +60,7 @@ object Dependencies {
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._presentation_viewModel_core.name) -> {
                                     add(Libs.Props.Api.prop, Libs.AndroidX.LifeCycle.composeViewModel)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.LifeCycle.viewModel)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.navigationFragment)
                                 }
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._domain_useCase_core.name) -> {
                                 }
