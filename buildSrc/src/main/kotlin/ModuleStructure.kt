@@ -24,13 +24,15 @@ object ModuleStructure {
             ProjectModule.ModuleType._app -> {
                 ModuleExtension.implAllModule(this, ProjectModule.ModuleType._app)
             }
+            ProjectModule.ModuleType._presentation_layout_core -> {
+                api(ProjectModule.ModuleType._domain_entity_core)
+            }
             ProjectModule.ModuleType._presentation_view_core -> {
+                api(ProjectModule.ModuleType._presentation_layout_core)
                 api(ProjectModule.ModuleType._presentation_viewModel_core)
-                api(ProjectModule.ModuleType._domain_useCase_core)
             }
             ProjectModule.ModuleType._presentation_viewModel_core -> {
                 api(ProjectModule.ModuleType._domain_useCase_core)
-                api(ProjectModule.ModuleType._data_repository_core)
             }
             ProjectModule.ModuleType._domain_useCase_core -> {
                 api(ProjectModule.ModuleType._domain_entity_core)
@@ -40,7 +42,6 @@ object ModuleStructure {
                 api(ProjectModule.ModuleType._data_gateway_remote)
                 api(ProjectModule.ModuleType._data_gateway_local)
             }
-            // gatewayモジュール
             ProjectModule.ModuleType._data_gateway_local -> {
                 impl(ProjectModule.ModuleType._domain_entity_core)
             }

@@ -111,5 +111,4 @@ object Libs {
         AndroidTestImpl("androidTestImplementation"),
         AndroidTestApi("androidTestApi")
     }
-
 }

@@ -41,6 +41,15 @@ object Dependencies {
                             when (project.path) {
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._app.name) -> {
                                 }
+                                ModuleExtension.convertModulePath(ProjectModule.ModuleType._presentation_layout_core.name) -> {
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Hilt.navigationCompose)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Compose.material)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Compose.ui)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Compose.preview)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.Compose.tooling)
+                                    add(Libs.Props.Api.prop, Libs.AndroidX.LifeCycle.runtime)
+                                    add(Libs.Props.AndroidTestApi.prop, Libs.AndroidX.Compose.test)
+                                }
                                 ModuleExtension.convertModulePath(ProjectModule.ModuleType._presentation_view_core.name) -> {
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Hilt.navigationCompose)
                                     add(Libs.Props.Api.prop, Libs.AndroidX.Compose.material)

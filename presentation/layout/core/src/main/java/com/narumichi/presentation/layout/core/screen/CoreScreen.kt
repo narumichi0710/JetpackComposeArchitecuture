@@ -1,4 +1,4 @@
-package com.narumichi.presentation.view.core.screen
+package com.narumichi.presentation.layout.core.screen
 
 import androidx.compose.runtime.Composable
 

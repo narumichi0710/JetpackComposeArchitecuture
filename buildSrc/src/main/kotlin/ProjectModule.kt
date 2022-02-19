@@ -4,6 +4,7 @@ object ProjectModule {
      * モジュールのレイヤー一覧
      */
     enum class Layer {
+        layout,
         view,
         viewModel,
         useCase,
@@ -24,6 +25,7 @@ object ProjectModule {
         val domainType: Domain? = null,
     ) {
         _app(),
+        _presentation_layout_core(Layer.layout, Domain.core),
         _presentation_view_core(Layer.view, Domain.core),
         _presentation_viewModel_core(Layer.viewModel, Domain.core),
         _domain_useCase_core(Layer.useCase, Domain.core),
@@ -36,6 +38,7 @@ object ProjectModule {
     enum class LayerType(
         val layerType: Layer? = null,
     ) {
+        _presentation_layout(Layer.layout),
         _presentation_view(Layer.view),
         _presentation_viewModel(Layer.viewModel),
         _domain_useCase(Layer.useCase),

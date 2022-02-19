@@ -1,6 +1,7 @@
-rootProject.name = "ArchitecutureTemplate"
+rootProject.name = "JetpackComposeArchitecture"
 
 include(":app")
+include(":presentation:layout:core")
 include(":presentation:view:core")
 include(":presentation:viewModel:core")
 include(":domain:entity:core")

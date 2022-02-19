@@ -1,4 +1,4 @@
-package com.narumichi.presentation.view.core.theme
+package com.narumichi.presentation.layout.core.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.TextStyle

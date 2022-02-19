@@ -57,6 +57,8 @@ object ModuleExtension {
     private fun filteringNeedLayer(
         moduleType: ProjectModule.ModuleType
     ): List<ProjectModule.Layer> = when (moduleType.layerType) {
+        ProjectModule.Layer.layout ->
+            listOf(ProjectModule.Layer.entity)
         ProjectModule.Layer.view ->
             listOf(
                 ProjectModule.Layer.view,
