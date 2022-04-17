@@ -7,7 +7,7 @@ package script
 object Libs {
 
     object Versions {
-        const val kotlin = "1.6.0"
+        const val kotlin = "1.6.10"
         const val junit = "4.13.2"
         const val espresso = "3.4.0"
         const val lifeCycle = "2.4.0"
