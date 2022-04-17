@@ -2,6 +2,7 @@ rootProject.name = "JetpackComposeArchitecture"
 
 include(":app")
 include(":presentation:layout:core")
+include(":presentation:layout:auth")
 include(":presentation:view:core")
 include(":presentation:view:auth")
 include(":presentation:viewModel:core")
