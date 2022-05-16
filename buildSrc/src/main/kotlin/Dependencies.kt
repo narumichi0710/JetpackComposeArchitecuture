@@ -22,7 +22,7 @@ object Dependencies {
             }
             subprojects {
                 afterEvaluate {
-                    takeIf { this.hasProperty(BuildConfig.android) }?.let { project ->
+                    takeIf { this.hasProperty(ProjectProperty.android) }?.let { project ->
                         project.dependencies {
                             add(Libs.Props.Impl.prop, Libs.AndroidX.coreKtx)
                             add(Libs.Props.Impl.prop, Libs.AndroidX.appCompat)

@@ -4,7 +4,6 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
 object ModuleExtension {
-
     internal fun findModuleType(project: Project): ProjectModule.ModuleType? {
         val projectName = convertEnumName(project)
         return ProjectModule.ModuleType.values()

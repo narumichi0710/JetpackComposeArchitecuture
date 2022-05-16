@@ -1,6 +1,6 @@
 package script
 
-import BuildConfig
+import ProjectProperty
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
@@ -30,19 +30,19 @@ object StaticScript {
         isRoot: Boolean?,
     ) {
         baseExtension.apply {
-            compileSdkVersion(BuildConfig.compileSdkVersion)
+            compileSdkVersion(ProjectProperty.compileSdkVersion)
             defaultConfig {
                 if (isRoot == true)
-                    applicationId = BuildConfig.applicationId
+                    applicationId = ProjectProperty.applicationId
 
-                minSdk = BuildConfig.minSdkVersion
-                targetSdk = BuildConfig.targetSdkVersion
-                versionCode = BuildConfig.versionCode
-                versionName = BuildConfig.versionName
+                minSdk = ProjectProperty.minSdkVersion
+                targetSdk = ProjectProperty.targetSdkVersion
+                versionCode = ProjectProperty.versionCode
+                versionName = ProjectProperty.versionName
                 multiDexEnabled = true
                 vectorDrawables.useSupportLibrary = true
-                testInstrumentationRunner = BuildConfig.testInstrumentationRunner
-                consumerProguardFiles(BuildConfig.consumerProguardFiles)
+                testInstrumentationRunner = ProjectProperty.testInstrumentationRunner
+                consumerProguardFiles(ProjectProperty.consumerProguardFiles)
             }
         }
     }
@@ -63,6 +63,9 @@ object StaticScript {
     * BuildType毎の設定処理を記述するための関数
     */
     private fun provideBuildSetting(baseExtension: BaseExtension) {
+
+
+
         baseExtension.apply {
             buildTypes {
                 getByName("release") {
