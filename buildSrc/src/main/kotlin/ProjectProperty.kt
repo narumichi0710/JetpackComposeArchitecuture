@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.dsl.BuildType
 
 object ProjectProperty {
 
@@ -32,11 +33,14 @@ object ProjectProperty {
     const val minSdkVersion = 26
 
     /**
-     * その他
+     * ハードコードをなるべく行わないようプロパティに定義したもの
      */
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val consumerProguardFiles = "consumer-rules.pro"
+    const val proguardAndroid = "proguard-android.txt"
+    const val proguardRules = "proguard-rules.pro"
     const val android = "android"
+    const val environment = "environment"
 
     /**
      * FlavorType一覧
@@ -44,4 +48,14 @@ object ProjectProperty {
     internal enum class FlavorType {
         prod, stg, dev
     }
+
+    /**
+     * プロジェクトで利用するBuildType一覧
+     */
+    internal enum class ProjectBuildType(val action: (BuildType, FlavorType) -> Unit) {
+        mock({ _, _ -> }),
+        debug({ _, _ -> }),
+        release({ _, _ -> })
+    }
+
 }

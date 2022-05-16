@@ -2,7 +2,10 @@ package script
 
 import ProjectProperty
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.internal.dsl.BuildType
+import org.gradle.api.Action
 import org.gradle.api.JavaVersion
+import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 
 
@@ -16,18 +19,18 @@ object StaticScript {
         project: Project? = null,
         isRoot: Boolean? = false
     ) {
-        provideDefaultConfig(baseExtension, project, isRoot)
+        provideDefaultConfig(isRoot, project, baseExtension)
         provideBaseExtension(baseExtension)
-        provideBuildSetting(baseExtension)
+        provideBuildSetting(isRoot, baseExtension)
     }
 
     /*
     * 各モジュール共通のdefaultConfigを設定するための関数
     */
     private fun provideDefaultConfig(
-        baseExtension: BaseExtension,
-        project: Project?,
         isRoot: Boolean?,
+        project: Project?,
+        baseExtension: BaseExtension,
     ) {
         baseExtension.apply {
             compileSdkVersion(ProjectProperty.compileSdkVersion)
@@ -62,34 +65,94 @@ object StaticScript {
     /*
     * BuildType毎の設定処理を記述するための関数
     */
-    private fun provideBuildSetting(baseExtension: BaseExtension) {
+    private fun provideBuildSetting(
+        isRoot: Boolean?,
+        baseExtension: BaseExtension
+    ) = baseExtension.apply {
+        flavorDimensions(ProjectProperty.environment)
+        productFlavors {
+            ProjectProperty.FlavorType.values().forEach { flavorType ->
+                create(flavorType.name) {
+                    if (isRoot == true && flavorType != ProjectProperty.FlavorType.prod) {
+                        applicationIdSuffix = flavorType.name
+                    }
+                    buildTypes {
+                        ProjectProperty.ProjectBuildType.values().forEach { projectBuildType ->
+                            executeBuildType(isRoot, baseExtension, this, flavorType, projectBuildType)
 
-
-
-        baseExtension.apply {
-            buildTypes {
-                getByName("release") {
-                    isMinifyEnabled = false
-                    proguardFiles(
-                        getDefaultProguardFile("proguard-android-optimize.txt"),
-                        "proguard-rules.pro"
-                    )
+                        }
+                    }
                 }
             }
+
         }
     }
 
     /*
-    * リリースビルドに対する設定
+    * BuildTypeに応じて設定処理を呼び出すための関数
     */
-    private fun releaseBuildSetting() {
-
+    private fun executeBuildType(
+        isRoot: Boolean?,
+        baseExtension: BaseExtension,
+        objectContainer: NamedDomainObjectContainer<BuildType>,
+        flavorType: ProjectProperty.FlavorType,
+        projectBuildType: ProjectProperty.ProjectBuildType
+    ) = objectContainer.apply {
+        Action<BuildType> {
+            projectBuildType.action(this, flavorType)
+            if (projectBuildType == ProjectProperty.ProjectBuildType.release) {
+                releaseBuildSetting(isRoot, baseExtension, this)
+            } else {
+                debugBuildSetting(baseExtension, this)
+            }
+        }.let {
+            if (projectBuildType in defaultExistBuildType) getByName(projectBuildType.name, it)
+            else runCatching { create(projectBuildType.name, it) }
+                .getOrElse { _ -> getByName(projectBuildType.name, it) }
+        }
     }
 
-    /*
-    *　デバッグビルドに対する設定
-    */
-    private fun debugBuildSetting() {
-
+    /**
+     * リリースビルドに対する設定
+     */
+    private fun releaseBuildSetting(
+        isRoot: Boolean?,
+        baseExtension: BaseExtension,
+        buildType: BuildType
+    ) = buildType.apply {
+        if (isRoot == true) {
+            isShrinkResources = true
+        }
+        isMinifyEnabled = true
+        proguardFiles(
+            baseExtension.getDefaultProguardFile(ProjectProperty.proguardAndroid),
+            ProjectProperty.proguardRules
+        )
     }
+
+    /**
+     * デバッグビルドに対する設定
+     */
+    private fun debugBuildSetting(
+        baseExtension: BaseExtension,
+        buildType: BuildType
+    ) = buildType.apply {
+        signingConfig = baseExtension.signingConfigs.getByName(ProjectProperty.ProjectBuildType.debug.name)
+        setDebuggable(true)
+        baseExtension.splits {
+            abi.isEnable = false
+            density.isEnable = false
+        }
+    }
+
+    /**
+     * gradle.ktsのBuildTypeの仕様として
+     * すでに存在するもの(release, debug)は取得、
+     * 自分で新たに作ったものは新規作成となっているので
+     * その条件分岐を判定するためのリスト
+     */
+    private val defaultExistBuildType = listOf(
+        ProjectProperty.ProjectBuildType.release,
+        ProjectProperty.ProjectBuildType.debug
+    )
 }
