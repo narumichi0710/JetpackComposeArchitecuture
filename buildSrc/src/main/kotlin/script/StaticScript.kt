@@ -2,6 +2,7 @@ package script
 
 import ProjectProperty
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.internal.dsl.BaseFlavor
 import com.android.build.gradle.internal.dsl.BuildType
 import org.gradle.api.Action
 import org.gradle.api.JavaVersion
@@ -79,7 +80,8 @@ object StaticScript {
                     buildTypes {
                         ProjectProperty.ProjectBuildType.values().forEach { projectBuildType ->
                             executeBuildType(isRoot, baseExtension, this, flavorType, projectBuildType)
-
+                            executeBuildConfig(this@create, flavorType, projectBuildType)
+                            executeManifestPlaceHolder(this@create, flavorType, projectBuildType)
                         }
                     }
                 }
@@ -144,6 +146,50 @@ object StaticScript {
             density.isEnable = false
         }
     }
+
+    /**
+     * BuildConfigTypeからBuildConfig設定処理を呼び出す
+     */
+    private fun executeBuildConfig(
+        baseFlavor: BaseFlavor,
+        flavorType: ProjectProperty.FlavorType,
+        buildTypeType: ProjectProperty.ProjectBuildType
+    ) {
+        ProjectProperty.BuildConfig.values().forEach {
+            getBuildConfigTypeFullPath(it.type)?.let { type ->
+                baseFlavor.buildConfigField(
+                    type,
+                    it.name,
+                    it.value(flavorType, buildTypeType)
+                )
+            }
+        }
+    }
+
+    /**
+     * BuildConfigの型をenumから特定する処理
+     */
+    private fun getBuildConfigTypeFullPath(
+        buildConfigType: ProjectProperty.IBuildConfigType
+    ): String? = when (buildConfigType) {
+        is ProjectProperty.BuildConfigType -> buildConfigType.name
+        is ProjectProperty.CustomBuildConfigType -> buildConfigType.fileFullPath
+        else -> null
+    }
+
+    /**
+     * ManifestPlaceHolderTypeからManifestPlaceHolderに値を設定する
+     */
+    private fun executeManifestPlaceHolder(
+        baseFlavor: BaseFlavor,
+        flavorType: ProjectProperty.FlavorType,
+        buildTypeType: ProjectProperty.ProjectBuildType
+    ) {
+        ProjectProperty.ManifestPlaceHolderType.values()
+            .map { it.name to it.value(flavorType, buildTypeType) }
+            .let { baseFlavor.addManifestPlaceholders(it.toMap()) }
+    }
+
 
     /**
      * gradle.ktsのBuildTypeの仕様として
