@@ -35,10 +35,8 @@ object ModuleExtension {
     internal fun sameLayerCoreModule(
         moduleType: ProjectModule.ModuleType
     ): List<ProjectModule.ModuleType> = ProjectModule.ModuleType.values().filter {
-        it.name.endsWith("_core") && moduleType != it && moduleType.name?.startsWith(
-            it?.name?.substringBefore(
-                "_core"
-            )
+        it.name.endsWith("_core") && moduleType != it && moduleType.name.startsWith(
+            it.name.substringBefore("_core")
         )
     }
 

@@ -8,6 +8,9 @@ import org.gradle.api.Project
 
 object StaticScript {
 
+    /*
+    * ktsから呼び出されるgradleの設定処理を行うための関数
+    */
     fun baseExtension(
         baseExtension: BaseExtension,
         project: Project? = null,
@@ -18,12 +21,14 @@ object StaticScript {
         provideBuildSetting(baseExtension)
     }
 
+    /*
+    * 各モジュール共通のdefaultConfigを設定するための関数
+    */
     private fun provideDefaultConfig(
         baseExtension: BaseExtension,
         project: Project?,
         isRoot: Boolean?,
     ) {
-        //TODO: AddFlavorSetting
         baseExtension.apply {
             compileSdkVersion(BuildConfig.compileSdkVersion)
             defaultConfig {
@@ -42,6 +47,9 @@ object StaticScript {
         }
     }
 
+    /*
+    * 各モジュールの共通ビルド設定を記述するための関数
+    */
     private fun provideBaseExtension(baseExtension: BaseExtension) {
         baseExtension.apply {
             compileOptions.sourceCompatibility = JavaVersion.VERSION_1_8
@@ -51,6 +59,9 @@ object StaticScript {
         }
     }
 
+    /*
+    * BuildType毎の設定処理を記述するための関数
+    */
     private fun provideBuildSetting(baseExtension: BaseExtension) {
         baseExtension.apply {
             buildTypes {
@@ -63,5 +74,19 @@ object StaticScript {
                 }
             }
         }
+    }
+
+    /*
+    * リリースビルドに対する設定
+    */
+    private fun releaseBuildSetting() {
+
+    }
+
+    /*
+    *　デバッグビルドに対する設定
+    */
+    private fun debugBuildSetting() {
+
     }
 }
