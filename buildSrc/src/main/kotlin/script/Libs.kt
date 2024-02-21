@@ -14,7 +14,7 @@ object Libs {
         const val compose = "1.1.0-rc01"
         const val hilt = "2.40.5"
         const val hiltLifecycle = "1.0.0-alpha03"
-        const val hiltCompose = "1.0.0-rc01"
+        const val hiltCompose = "1.2.0"
         const val timber = "5.0.1"
         const val material = "1.4.0"
         const val androidXCore = "1.7.0"
