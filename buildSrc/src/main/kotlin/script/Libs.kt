@@ -18,7 +18,7 @@ object Libs {
         const val timber = "5.0.1"
         const val material = "1.4.0"
         const val androidXCore = "1.7.0"
-        const val androidXAppCompat = "1.4.0"
+        const val androidXAppCompat = "1.7.0"
         const val gradle = "7.0.4"
         const val coroutine = "1.6.0"
         const val okhttp = "4.9.2"
