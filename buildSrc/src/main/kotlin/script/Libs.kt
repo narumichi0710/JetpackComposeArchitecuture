@@ -24,7 +24,7 @@ object Libs {
         const val okhttp = "4.9.2"
         const val retrofit = "2.9.0"
         const val moshi = "1.13.0"
-        const val robolectric = "1.0.0"
+        const val robolectric = "1.6.1"
         const val mockito = "1.10.19"
     }
 
