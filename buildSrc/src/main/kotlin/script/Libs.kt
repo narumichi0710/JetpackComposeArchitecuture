@@ -9,7 +9,7 @@ object Libs {
     object Versions {
         const val kotlin = "1.6.20"
         const val junit = "4.13.2"
-        const val espresso = "3.4.0"
+        const val espresso = "3.6.1"
         const val lifeCycle = "2.4.0"
         const val compose = "1.1.0-rc01"
         const val hilt = "2.40.5"
