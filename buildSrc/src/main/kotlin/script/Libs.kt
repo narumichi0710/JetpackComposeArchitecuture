@@ -46,7 +46,7 @@ object Libs {
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:${Versions.androidXCore}"
         const val appCompat = "androidx.appcompat:appcompat:${Versions.androidXAppCompat}"
-        const val navigationFragment = "androidx.navigation:navigation-fragment:2.4.1"
+        const val navigationFragment = "androidx.navigation:navigation-fragment:2.8.3"
 
         object Hilt {
             const val lifecycleViewModel =
